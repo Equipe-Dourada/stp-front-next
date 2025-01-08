@@ -27,10 +27,8 @@ export default function Pacientes() {
             body: JSON.stringify(pacienteData),
         });
 
-        console.log('Sending JSON to backend:', JSON.stringify(pacienteData));
-
         if (res.ok) {
-            fetchPacientes();
+            await fetchPacientes();
             setIsCreating(false);
         } else {
             console.error("Erro ao criar paciente:", await res.json());
@@ -45,7 +43,7 @@ export default function Pacientes() {
             body: JSON.stringify(pacienteData),
         });
         if (res.ok) {
-            fetchPacientes();
+            await fetchPacientes();
             setEditingPaciente(undefined);
         } else {
             console.error("Erro ao atualizar paciente:", await res.json());
@@ -58,7 +56,7 @@ export default function Pacientes() {
         if (confirmDelete) {
             const res = await fetch(`/api/pacientes/${id}`, { method: 'DELETE' });
             if (res.ok) {
-                fetchPacientes();
+                await fetchPacientes();
             } else {
                 console.error("Erro ao deletar paciente:", await res.json());
                 alert("Erro ao deletar o paciente. Verifique o console para mais detalhes.");

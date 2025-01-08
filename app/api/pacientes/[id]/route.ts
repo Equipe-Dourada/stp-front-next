@@ -11,6 +11,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
         }
         return NextResponse.json({ ...paciente, id: paciente.id.toString() });
     } catch (error) {
+        console.error("Erro ao processar:", error);
         return NextResponse.json({ error: "Erro ao buscar paciente" }, { status: 500 });
     }
 }
@@ -24,6 +25,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         });
         return NextResponse.json({ ...paciente, id: paciente.id.toString() });
     } catch (error) {
+        console.error("Erro ao processar:", error);
         return NextResponse.json({ error: "Erro ao atualizar paciente" }, { status: 500 });
     }
 }
@@ -33,6 +35,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
         await prisma.paciente.delete({ where: { id: params.id } });
         return NextResponse.json({ message: 'Paciente deletado' });
     } catch (error) {
+        console.error("Erro ao processar:", error);
         return NextResponse.json({ error: "Erro ao deletar paciente" }, { status: 500 });
     }
 }

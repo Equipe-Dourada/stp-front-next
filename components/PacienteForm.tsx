@@ -18,7 +18,7 @@ const PacienteForm: React.FC<PacienteFormProps> = ({ onSubmit, initialValues, on
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(paciente);
-        setPaciente({ cpf: '', nome: '', idade: 0 }); // Limpa o formulário após o envio
+        setPaciente({ cpf: '', nome: '', idade: 0 });
     };
 
     return (
