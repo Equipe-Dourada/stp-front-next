@@ -1,7 +1,8 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { Paciente } from '@/types/Paciente';
-import { Transferencia } from '@/types/Transferencia';
+import {useState, useEffect} from 'react';
+import {Paciente} from '@/types/Paciente';
+import {Transferencia} from '@/types/Transferencia';
+import Link from "next/link";
 
 const medicos = ['Dr. Souza', 'Dr. Oliveira', 'Dr. Silva', 'Dra. Pereira'];
 
@@ -28,18 +29,21 @@ export default function TransferenciaPage() {
     }, []);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setTransferencia({ ...transferencia, [event.target.name]: event.target.value });
+        setTransferencia({...transferencia, [event.target.name]: event.target.value});
     };
 
     const handlePacienteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedPaciente = pacientes.find(p => p.id === event.target.value) || null;
-        setTransferencia({ ...transferencia, paciente: selectedPaciente });
+        setTransferencia({...transferencia, paciente: selectedPaciente});
     };
 
     const handleDateChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
-        setTransferencia({...transferencia, [event.target.name]: event.target.value ? new Date(event.target.value) : null });
+        setTransferencia({
+            ...transferencia,
+            [event.target.name]: event.target.value ? new Date(event.target.value) : null
+        });
     };
 
     const handleConfirmarTransferencia = () => {
@@ -61,7 +65,7 @@ export default function TransferenciaPage() {
     };
 
     return (
-        <div className="container mx-auto p-4 bg-gray-800 text-white">
+        <div className="container mx-auto p-4 text-white">
             <h1 className="text-2xl font-bold mb-4">Nova Transferência</h1>
 
             <div className="mb-4">
@@ -130,10 +134,18 @@ export default function TransferenciaPage() {
                 </select>
             </div>
 
-            <button onClick={handleConfirmarTransferencia}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Confirmar Transferência
-            </button>
+            <div className="space-x-2">
+                <button onClick={handleConfirmarTransferencia}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Confirmar Transferência
+                </button>
+
+                <Link href="/pacientes">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Voltar para Pacientes
+                    </button>
+                </Link>
+            </div>
         </div>
     );
 }
