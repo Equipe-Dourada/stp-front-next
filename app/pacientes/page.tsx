@@ -14,6 +14,32 @@ export default function Pacientes() {
         fetchPacientes();
     }, []);
 
+    useEffect(() => {
+        const mensagens = [
+            "Transferência Cancelada",
+            "Transferência Iniciada",
+            "Paciente em Trânsito",
+            "Paciente Chegou",
+            "Nova Transferência Criada",
+            "Novo Paciente Cadastrado"
+        ];
+
+        let timeoutId: NodeJS.Timeout;
+
+        const gerarNotificacao = () => {
+            const mensagemAleatoria = mensagens[Math.floor(Math.random() * mensagens.length)];
+            const tempoAleatorio = Math.floor(Math.random() * 600000);
+
+            alert(mensagemAleatoria);
+
+            timeoutId = setTimeout(gerarNotificacao, tempoAleatorio);
+        };
+
+        gerarNotificacao();
+
+        return () => clearTimeout(timeoutId);
+    }, []);
+
     const fetchPacientes = async () => {
         const res = await fetch('/api/pacientes');
         const data = await res.json();
